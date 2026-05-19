@@ -12,57 +12,102 @@
 
 <body style="margin: 0px; overflow: hidden">
     <a-scene embedded arjs="sourceType: webcam;">
-        <!-- handle marker with your own pattern -->
-        <a-marker type="pattern" url="./assets/pattern-brick.patt">
-            <a-box position="0 0.5 0" material="color: red;"> </a-box>
+        <a-marker preset="hiro">
+            <a-entity id="foodModel" gltf-model="./assets/models/croissant.glb" position="0 0.08 0" rotation="0 180 0"
+                scale="4 4 4">
+            </a-entity>
+
+            <a-plane position="0 0.0 0" rotation="-90 0 0" width="2.8" height="4" color="#000" opacity="0.9"
+                material="side: double">
+            </a-plane>
+
+            <a-text id="hiroFoodInfo" position="-1.25 0.12 -1.52" rotation="-90 0 0" width="2.5" color="#ffeb3b"
+                align="left" baseline="top" side="double" wrap-count="28">
+            </a-text>
         </a-marker>
 
         <a-marker preset="kanji">
-            <a-entity scale="1 1 1" gltf-model="./assets/Kulkas.glb" animation-mixer></a-entity>
-        </a-marker>
-
-        <a-marker preset="hiro">
-
-            <!-- Model -->
-            <a-entity gltf-model="./assets/Plant.glb" position="0 0 0" scale="0.4 0.4 0.4">
+            <a-entity gltf-model="./assets/models/pizza.glb" position="0 0.0 0" rotation="0 180 0" scale="2 2 2">
             </a-entity>
 
-            <!-- Background panel -->
-            <a-plane position="0 1.2 0" width="2" height="1" color="#222" opacity="0.7">
+            <a-plane position="0 0.0 0" rotation="-90 0 0" width="2.8" height="4" color="#000" opacity="0.9"
+                material="side: double">
             </a-plane>
 
-            <!-- Text info -->
-            <a-text id="foodInfo" position="-0.8 1.2 0.01" width="2" color="white">
+            <a-text id="kanjiFoodInfo" position="-1.25 0.12 -1.52" rotation="-90 0 0" width="2.5" color="#ffeb3b"
+                align="left" baseline="top" side="double" wrap-count="28">
             </a-text>
-
         </a-marker>
 
-        <!-- add a simple camera -->
+        <a-marker type="pattern" url="./assets/pattern-brick.patt">
+            <a-entity gltf-model="./assets/models/mangkuk_bakso_mie_ayam.glb" position="0 0.08 0" rotation="0 180 0"
+                scale="4 4 4">
+            </a-entity>
+
+            <a-plane position="0 0.0 0" rotation="-90 0 0" width="2.8" height="4" color="#000" opacity="0.9"
+                material="side: double">
+            </a-plane>
+
+            <a-text id="brickFoodInfo" position="-1.25 0.12 -1.52" rotation="-90 0 0" width="2.5" color="#ffeb3b"
+                align="left" baseline="top" side="double" wrap-count="28">
+            </a-text>
+        </a-marker>
+
         <a-entity camera></a-entity>
     </a-scene>
+    <script src="./scripts/foods.js"></script>
     <script>
-        const foods = {
-            hiro: {
-                name: "Nasi Goreng",
-                ingredients: [
-                    "Nasi",
-                    "Bawang Merah",
-                    "Bawang Putih",
-                    "Kecap",
-                    "Garam",
-                    "MSG"
-                ],
-                model: "./assets/NasiGoreng.glb"
-            }
-        }
-        const food = foods.hiro;
+        const food = foods.croissant;
+        const foodModel = document.querySelector("#foodModel");
 
-        document.querySelector("#foodInfo")
+        foodModel.addEventListener("model-loaded", () => {
+            console.log("Model loaded:", food.model);
+        });
+
+        foodModel.addEventListener("model-error", (event) => {
+            console.error("Model failed to load:", food.model, event.detail);
+        });
+
+        document.querySelector("#hiroFoodInfo")
             .setAttribute(
                 "value",
                 food.name +
                 "\n\nBahan:\n- " +
-                food.ingredients.join("\n- ")
+                food.ingredients.join("\n- ") +
+                "\n\nNutrisi:\n- " +
+                food.nutrition.join("\n- ") +
+                "\n\nAlergen:\n- " +
+                food.allergens.join("\n- ") +
+                "\n\nProses: " +
+                food.cookingProcess
+            );
+
+        document.querySelector("#kanjiFoodInfo")
+            .setAttribute(
+                "value",
+                foods.pizza.name +
+                "\n\nBahan:\n- " +
+                foods.pizza.ingredients.join("\n- ") +
+                "\n\nNutrisi:\n- " +
+                foods.pizza.nutrition.join("\n- ") +
+                "\n\nAlergen:\n- " +
+                foods.pizza.allergens.join("\n- ") +
+                "\n\nProses: " +
+                foods.pizza.cookingProcess
+            );
+
+        document.querySelector("#brickFoodInfo")
+            .setAttribute(
+                "value",
+                foods.miAyam.name +
+                "\n\nBahan:\n- " +
+                foods.miAyam.ingredients.join("\n- ") +
+                "\n\nNutrisi:\n- " +
+                foods.miAyam.nutrition.join("\n- ") +
+                "\n\nAlergen:\n- " +
+                foods.miAyam.allergens.join("\n- ") +
+                "\n\nProses: " +
+                foods.miAyam.cookingProcess
             );
     </script>
 </body>
