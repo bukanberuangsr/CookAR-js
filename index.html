@@ -55,9 +55,31 @@
             </a-text>
         </a-marker>
 
+        <a-marker type="pattern" url="./assets/pattern-march7th.patt">
+            <a-entity gltf-model="./assets/models/nasi_lemak.glb" position="1.95 0.25 -1.25" rotation="0 180 0"
+                scale="1.2 1.2 1.2">
+            </a-entity>
+
+            <a-plane position="0 0.0 0" rotation="-90 0 0" width="2.8" height="5" color="#FFE8F0" opacity="0.7"
+                material="side: double">
+            </a-plane>
+
+            <a-text id="march7thFoodTitle" position="-1.25 0.1 -1.75" rotation="-90 0 0" width="2.5" color="#000"
+                align="left" baseline="top" side="double" wrap-count="15">
+            </a-text>
+
+            <a-text id="march7thFoodInfo" position="-1.25 0.12 -1.35" rotation="-90 0 0" width="2.5" color="#000"
+                align="left" baseline="top" side="double" wrap-count="28">
+            </a-text>
+
+            <a-text id="march7thFoodAllergens" position="-1.25 0.12 2.0" rotation="-90 0 0" width="2.5" color="#d00000"
+                align="left" baseline="top" side="double" wrap-count="28">
+            </a-text>
+        </a-marker>
+
         <a-marker type="pattern" url="./assets/pattern-brick.patt">
-            <a-entity gltf-model="./assets/models/mangkuk_bakso_mie_ayam.glb" position="-0.95 0.15 -0.75"
-                rotation="0 180 0" scale="2.8 2.8 2.8">
+            <a-entity gltf-model="./assets/models/mi_ayam.glb" position="0.85 0.15 -0.75" rotation="0 180 0"
+                scale="0.6 0.6 0.6">
             </a-entity>
 
             <a-plane position="0 0.0 0" rotation="-90 0 0" width="2.8" height="4" color="#FFE8F0" opacity="0.7"
@@ -118,6 +140,7 @@
         renderFoodInfo("hiro", foods.croissant);
         renderFoodInfo("kanji", foods.pizza);
         renderFoodInfo("brick", foods.miAyam);
+        renderFoodInfo("march7th", foods.nasiLemak);
     </script>
 </body>
 
