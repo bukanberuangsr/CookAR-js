@@ -25,6 +25,8 @@ const foods = {
         name: "Pizza",
         ingredients: [
             "Tepung terigu",
+            "Telur",
+            "Air",
             "Saus tomat",
             "Keju",
             "Daging olahan",
